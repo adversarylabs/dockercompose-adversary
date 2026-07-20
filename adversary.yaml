@@ -1,0 +1,33 @@
+name: docker-compose
+version: 0.0.0
+description: Reviews Compose services for privilege, host access, and image reproducibility.
+
+triggers:
+  manual: true
+  files_changed:
+    - "compose.yml"
+    - "compose.yaml"
+    - "docker-compose.yml"
+    - "docker-compose.yaml"
+    - "**/compose.yml"
+    - "**/docker-compose.yml"
+
+runtime:
+  name: node
+  version: "22"
+  command:
+    - dist/index.js
+
+permissions:
+  enforcement: advisory
+  filesystem:
+    read:
+      - .
+    write:
+      - .adversary/results
+  network: false
+  environment:
+    allow: []
+
+findings:
+  format: adversary.review.v1

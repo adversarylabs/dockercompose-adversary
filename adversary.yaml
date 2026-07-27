@@ -1,5 +1,5 @@
 name: docker-compose
-version: 0.0.4
+version: 0.0.5
 description: Reviews Compose services for privilege, host access, and image reproducibility.
 
 triggers:

@@ -1,0 +1,5 @@
+services:
+  agent:
+    image: example/agent:1.0.0
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

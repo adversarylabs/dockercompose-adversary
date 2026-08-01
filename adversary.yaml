@@ -1,5 +1,5 @@
-name: docker-compose
-version: 0.0.5
+name: container/docker-compose
+version: 0.0.6
 description: Reviews Compose services for privilege, host access, and image reproducibility.
 
 triggers:
@@ -10,7 +10,9 @@ triggers:
     - "docker-compose.yml"
     - "docker-compose.yaml"
     - "**/compose.yml"
+    - "**/compose.yaml"
     - "**/docker-compose.yml"
+    - "**/docker-compose.yaml"
 
 detection:
   files:

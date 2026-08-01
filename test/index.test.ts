@@ -5,7 +5,16 @@ import { createApp } from "../src/index.ts";
 
 const fixture = (name: string) => new URL(`../fixtures/${name}`, import.meta.url).pathname;
 const review = (name: string, raw = false) => createApp().run({ input: { source: { path: fixture(name) } }, includeRawObservations: raw });
-const ruleCases = [{"key":"privileged","id":"docker-compose.privileged"},{"key":"host-namespace","id":"docker-compose.host-namespace"},{"key":"mutable-image","id":"docker-compose.mutable-image"}];
+const ruleCases = [
+  { key: "privileged", id: "docker-compose.privileged" },
+  { key: "docker-sock-mount", id: "docker-compose.docker-sock-mount" },
+  { key: "host-namespace", id: "docker-compose.host-namespace" },
+  { key: "dangerous-capabilities", id: "docker-compose.dangerous-capabilities" },
+  { key: "security-opt-disabled", id: "docker-compose.security-opt-disabled" },
+  { key: "sensitive-port-exposed", id: "docker-compose.sensitive-port-exposed" },
+  { key: "inline-secret-env", id: "docker-compose.inline-secret-env" },
+  { key: "mutable-image", id: "docker-compose.mutable-image" },
+];
 
 test("every initial rule has focused vulnerable and clean coverage", async () => {
   for (const rule of ruleCases) {
@@ -30,5 +39,5 @@ test("output ordering and protocol envelope are deterministic", async () => {
   assert.deepEqual(second, first);
   const envelope = JSON.parse(JSON.stringify(createAdversaryRunEnvelope(first)));
   assert.equal(envelope.protocolVersion, 1);
-  assert.equal(envelope.result.adversary.name, "docker-compose");
+  assert.equal(envelope.result.adversary.name, "container/docker-compose");
 });

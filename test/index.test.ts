@@ -13,6 +13,7 @@ const ruleCases = [
   { key: "security-opt-disabled", id: "docker-compose.security-opt-disabled" },
   { key: "sensitive-port-exposed", id: "docker-compose.sensitive-port-exposed" },
   { key: "inline-secret-env", id: "docker-compose.inline-secret-env" },
+  { key: "writable-git-bind", id: "docker-compose.writable-git-bind" },
   { key: "mutable-image", id: "docker-compose.mutable-image" },
 ];
 

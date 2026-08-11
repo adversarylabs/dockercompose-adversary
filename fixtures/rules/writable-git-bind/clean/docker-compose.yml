@@ -1,0 +1,10 @@
+services:
+  blog:
+    image: example/blog:v1.2.3
+    volumes:
+      - ../.git:/app/.git:ro,z
+      - ./content:/app/content
+      - git-cache:/var/cache/git
+
+volumes:
+  git-cache:

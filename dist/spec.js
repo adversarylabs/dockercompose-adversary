@@ -157,6 +157,28 @@ export const spec = {
             }
         },
         {
+            "id": "docker-compose.writable-git-bind",
+            "title": "Host .git metadata is mounted writable",
+            "summary": "The external .git directory is writable; mount it read-only to prevent permission collisions",
+            "category": "security",
+            "severity": "medium",
+            "confidence": "high",
+            "whyItMatters": "A container that only needs repository metadata can still mutate host refs, config, hooks, and object state through a writable .git bind.",
+            "impact": "Container processes can corrupt the host checkout or leave repository metadata changes that affect later developer commands.",
+            "recommendation": "Mount .git read-only with :ro (or :ro,z when SELinux relabeling is required).",
+            "complexity": "trivial",
+            "tags": ["security", "bind-mount", "git"],
+            "match": {
+                "kind": "content",
+                "files": [...COMPOSE_FILES],
+                "pattern": {
+                    "pattern": "^[\\t ]*-[\\t ]*[\"']?(?![^\\r\\n]*:[^\\r\\n]*:[^\\r\\n]*\\bro\\b)(?:\\.\\.?/|/|~/|\\$[A-Z_][A-Z0-9_]*/|\\$\\{[^}\\r\\n]+\\}/)(?:[^:\\r\\n]*/)?\\.git/?[\\t ]*:[^\\r\\n]+$",
+                    "flags": "im"
+                },
+                "requires": []
+            }
+        },
+        {
             "id": "docker-compose.mutable-image",
             "title": "Compose service uses a mutable image",
             "summary": "Compose service uses a mutable image",

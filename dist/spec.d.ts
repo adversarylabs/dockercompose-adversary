@@ -194,6 +194,27 @@ export declare const spec: {
             readonly requires: [];
         };
     }, {
+        readonly id: "docker-compose.writable-git-bind";
+        readonly title: "Host .git metadata is mounted writable";
+        readonly summary: "The external .git directory is writable; mount it read-only to prevent permission collisions";
+        readonly category: "security";
+        readonly severity: "medium";
+        readonly confidence: "high";
+        readonly whyItMatters: "A container that only needs repository metadata can still mutate host refs, config, hooks, and object state through a writable .git bind.";
+        readonly impact: "Container processes can corrupt the host checkout or leave repository metadata changes that affect later developer commands.";
+        readonly recommendation: "Mount .git read-only with :ro (or :ro,z when SELinux relabeling is required).";
+        readonly complexity: "trivial";
+        readonly tags: ["security", "bind-mount", "git"];
+        readonly match: {
+            readonly kind: "content";
+            readonly files: ["compose.yml", "compose.yaml", "docker-compose.yml", "docker-compose.yaml", "**/compose.yml", "**/compose.yaml", "**/docker-compose.yml", "**/docker-compose.yaml"];
+            readonly pattern: {
+                readonly pattern: "^[\\t ]*-[\\t ]*[\"']?(?![^\\r\\n]*:[^\\r\\n]*:[^\\r\\n]*\\bro\\b)(?:\\.\\.?/|/|~/|\\$[A-Z_][A-Z0-9_]*/|\\$\\{[^}\\r\\n]+\\}/)(?:[^:\\r\\n]*/)?\\.git/?[\\t ]*:[^\\r\\n]+$";
+                readonly flags: "im";
+            };
+            readonly requires: [];
+        };
+    }, {
         readonly id: "docker-compose.mutable-image";
         readonly title: "Compose service uses a mutable image";
         readonly summary: "Compose service uses a mutable image";

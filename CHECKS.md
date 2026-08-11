@@ -99,6 +99,17 @@ Public grounding: Docker Engine security docs (privileged, capabilities, docker.
 
 ## Medium
 
+### `docker-compose.writable-git-bind`
+
+| | |
+| --- | --- |
+| **What** | A service bind-mounts the host repository's `.git` directory with write access |
+| **Why** | Containers that only need version or last-updated metadata can still mutate refs, config, hooks, and object state in the host checkout |
+| **Looks for** | Short-form host-path `.git` binds without a `ro` mount option, including SELinux `:z` / `:Z` mounts |
+| **Stays quiet when** | The mount includes `:ro`; named volumes and ordinary source/artifact bind mounts |
+| **Public examples** | PyPI Warehouse PR #13231 review discussion |
+| **Remediation** | Add `:ro`, or `:ro,z` when SELinux relabeling is required |
+
 ### `docker-compose.mutable-image`
 
 | | |

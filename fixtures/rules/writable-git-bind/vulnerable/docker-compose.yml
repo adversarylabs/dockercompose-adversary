@@ -1,0 +1,6 @@
+services:
+  blog:
+    image: example/blog:v1.2.3
+    volumes:
+      - ../.git:/app/.git:z
+      - ${REPOSITORY_ROOT}/.git:/srv/repository/.git

@@ -3,7 +3,7 @@ import { Adversary } from "@adversarylabs/sdk";
 import { analyzeRepository } from "./analyze.js";
 import { registerRules } from "./rules.js";
 export function createApp() {
-    const app = new Adversary({ name: "container/docker-compose", version: "0.0.6", review: { maximumFindings: 12 } });
+    const app = new Adversary({ name: "container/docker-compose", version: "0.0.10", review: { maximumFindings: 12 } });
     registerRules(app);
     app.rule("docker-compose.review", async (ctx) => analyzeRepository(ctx));
     return app;

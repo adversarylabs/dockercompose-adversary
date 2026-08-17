@@ -2,21 +2,20 @@
 
 Reviews Compose services for privilege, host access, and image reproducibility.
 
-## Checks
+## Goals
 
-- **Compose service runs privileged:** Remove privileged mode and add only required capabilities.
-- **Compose service joins a host namespace:** Use isolated networks and PID/IPC namespaces.
-- **Compose service uses a mutable image:** Pin deployed images by digest.
+The adversary is designed to produce a small number of high-confidence,
+actionable findings grounded in concrete repository evidence. Its review should
+be deterministic where possible, explicit about impact, and quiet when the
+available evidence does not justify a finding.
 
-## Development
+## Scope
 
-```sh
-npm ci
-npm test
-adversary validate .
-adversary pack --check .
-```
+It evaluates Compose service definitions and overrides, including privilege, host access, secrets, ports, mounts, and image references.
 
-## Automatic detection
+The complete detector or review inventory is maintained in
+[CHECKS.md](CHECKS.md).
 
-`adversary auto` selects the docker-compose adversary when changes include `compose.yml` or `compose.yaml`, plus the other domain-specific patterns declared in `adversary.yaml`. Unrelated changes do not select it.
+## Boundaries
+
+It owns this packaging or orchestration layer. Adjacent container, Kubernetes, Helm, Kustomize, and secret concerns remain with their specialist adversaries.

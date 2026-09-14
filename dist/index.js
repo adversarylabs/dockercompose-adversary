@@ -18151,7 +18151,7 @@ function matchesGlob(path, glob) {
 
 // src/index.ts
 function createApp() {
-  const app = new Adversary({ name: "container/docker-compose", version: "0.0.13", review: { maximumFindings: 12 } });
+  const app = new Adversary({ name: "container/docker-compose", version: "0.0.14", review: { maximumFindings: 12 } });
   registerRules(app);
   app.rule("docker-compose.review", async (ctx) => analyzeRepository(ctx));
   return app;
